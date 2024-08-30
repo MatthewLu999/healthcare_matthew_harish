@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Page</title>
+  </head>
+  <body>
+    <!-- ======================== HEADER PART ============================== -->
+    <div id="header"></div>
+    <!-- import header from heade page -->
+    <script>
+      function includeHeader() {
+        fetch("header.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("header").innerHTML = data;
+          })
+          .catch((error) => console.error("Error fetching header:", error));
+      }
+      includeHeader();
+
+      // include footer by javascript
+      function includeFooter() {
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("footer").innerHTML = data;
+          })
+          .catch((error) => console.error("Error fetching header:", error));
+      }
+      includeFooter();
+    </script>
+
+    <!-- ============================= PAGE BODY  ==============================-->
+    <h1>HELLO</h1>
+
+    <!-- ============================= FOOTER PART ================================-->
+    <div id="footer"></div>
+  </body>
+</html>
