@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- import Lora Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel=”stylesheet” href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <!-- import my css files -->
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index_small_screen.css">
+    <title>PROFILE</title>
+    <style>
+        .button {
+            position: relative;
+            background-color: #04AA6D; /* Green */
+          border: none;
+          color: white;
+          padding: 12px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin-top:0px;
+          margin-bottom: 40px;
+          cursor: pointer;
+          -webkit-transition-duration: 0.4s; /* Safari */
+          transition-duration: 0.4s;
+        }
+        
+        .button:hover {
+          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        
+        /* formart profile */
+        .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.profile-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 10px);
+}
+
+
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+input, select, textarea {
+    padding: 8px;
+    margin-top: 5px;
+}
+/* formart bottom */
+.settings-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
+    background: white; /* Adjust background color as needed */
+}
+
+.setting, .toggle-setting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.color-palette {
+    display: flex;
+    gap: 10px;
+}
+
+.color-circle {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.color-circle.blue { background-color: #0000ff; }
+.color-circle.green { background-color: #00ff00; }
+.color-circle.red { background-color: #ff0000; }
+
+        </style>
+</head>
+
+<body>
+    <!-- main wrapper -->
+    <header>
+        <section>
+            <div class="header-section">
+                <div class="header-logo"><img height=90px src="images/doctor_icon.png"></div>
+                <div class="header-slogan">XYZ MEDICAL CLINIC</div>
+                <div class="header-call-us">
+                    <table>
+                        <tr>
+                            <td colspan="2"><img width="55px" height="55px" src="images/callus.png"></td>
+                            <td>
+                                <p>Call for an appointment</p>
+                                <p>(123)-456-7890</p>
+                            </td>
+                        </tr> 
+                    </table>
+                </div>
+            </div>
+            <div class="function1-animation-keyframe"><p>Welcome to XYZ Medical Clinic</p> </div>
+        </section>
+        <!-- navigation -->
+       
+        <section>
+            <div class="navigation-section">
+                <div class="navigation-items">
+                    <a href="index.html" class="navigation-text navigation-items-active" target="_blank">Home</a>
+                    <a href="#" id="news-managment" class="navigation-text">News Management    
+                        <!-- <div class="dropdown-content">
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                      </div> -->
+                        <img class="mini-icon" height="20px" width="25px" src="images/arrow_down.svg"></a>
+                    <a href="about.html" class="navigation-text">Reporting Center</a>
+                    <a href="about.html" class="navigation-text" >Contact Us</a>
+                </div>
+                <div class="navigation-right-container">
+                    <div class="navigation-right-container-avatar">
+                        <div class="navigation-right-container-item avatar"><img height="30px" width="30px" src="images/login_icon.JPG"> </div>
+                        <div class="navigation-right-container-item" style="font-size: 13px;margin-bottom: 2px; color: white; font-weight: bold;">Welcome, Matthew</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+    
+        <!-- MAIN CONTENT -->
+        <div class="bg-container" style="height: 650px;">
+            <main>
+                <div class="profile">
+                    <div class="profile-header">
+                        <img src="images/profile.png" width="30%" height="30%" alt="Profile Picture">
+                        <div class="profile-info">
+                            <h2>Matthew</h2>
+                            <p>matthew@gmail.com</p>
+                        </div>
+                        <button>Share this profile</button>
+                    </div>
+                   
+                    <form class="profile-form">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select>
+                                <option>Country 1</option>
+                                <option>Country 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Address</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Educational Background</label>
+                            <textarea></textarea>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+                  <section>
+                    <div class="settings-container">
+                        <div class="setting">
+                            <label>Language</label>
+                            <select>
+                                <option>English</option>
+                                <option>French</option>
+                            </select>
+                        </div>
+                        <div class="toggle-setting">
+                            <span>Blind Users (Screen Reader)</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting">
+                            <label>Font Size</label>
+                            <select>
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                            </select>
+                        </div>
+                        <div class="setting">
+                            <label>Color Contrast</label>
+                            <input type="range" min="1" max="100">
+                        </div>
+                        <div class="toggle-setting">
+                            <span>Keyboard navigation</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting">
+                            <label>Appearance</label>
+                            <div class="color-palette">
+                                <div class="color-circle blue"></div>
+                                <div class="color-circle green"></div>
+                                <div class="color-circle red"></div>
+                                <!-- Add more colors as needed -->
+                            </div>
+                        </div>
+                    </div>
+                  </section>
+            <!-- end main -->
+            </main> 
+                 <!-- end body -->
+                  <!-- start footer -->
+                   <footer>
+                    <div class="footer-container" style="margin-top: 0px;">
+                       <div class="footer-container-icon-working-hour"><img height="120px" width="120px" src="images/working-hour.png"></div> 
+                       <div class="footer-container-text-working-hour">
+                        <h4 style="text-decoration: underline;">HOURS OF OPERATION</h4>
+                        <h5>Monday - Thursday 9AM-9PM</h5>
+                        <h5> Fridays -  9AM-6PM</h5>
+                        <h5>Sat-Sun - 10AM-4PM</h5>
+                       </div> 
+                       <div class="footer-container-icon-contact-us"><img height="120px" width="120px" src="images/contact-us.png"></div> 
+                       <div class="footer-container-text-contact-us">
+                        <h4 style="text-decoration: underline;">CONTACT US</h4>
+                        <h5>Unit XYZ, Winnipeg, Manitoba</h5>
+                        <h5>Tel:(123) 4567-1234</h5>
+                        <h5>Fax: (321) 3456-2345</h5>
+                       </div> 
+                    </div>
+                   </footer>
+        </div>
+    
+</body>
+
+</html>
