@@ -63,6 +63,7 @@ export class articleImage extends images {
                     .then(() => {
                         console.log('Image uploaded and document created successfully');
                         resolve(docRef.id);
+                        setCookieforArray("uploadedimgresult", "success", 365);
 
                     })
                     .catch((error) => {

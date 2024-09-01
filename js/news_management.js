@@ -21,6 +21,7 @@ let subheading = ""
 let content = ""
 let topic = ""
 let isdeleted = 0
+let isuploadedIMGSuccess = false
 
 
 //=============  DEFINITON FOR FUNCTIONS ==========================================
@@ -38,6 +39,8 @@ function clearAllControls() {
     //clear label img
     let labelIMG = document.getElementById("labelIMG")
     labelIMG.innerText = "Choose photo for the news ..."
+    // hide the done progress bar
+    hideDoneProgress()
 }
 
 function isEmptyString(str) {
@@ -92,12 +95,44 @@ function handleFileUpload() {
         console.log('File selected:', fileName);
         imgContent = file
         isuploadedPhoto = true
+        showImage(imgContent)
 
         // You can do further processing with the file here, such as uploading it to a server
     } else {
         console.log('No file selected');
     }
 }
+
+function showImage(file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        const imgElement = document.getElementById('resultofuploadedIMG');
+        imgElement.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function showRunningProgress() {
+    let progressbarrunning = document.getElementById('progresssrunning')
+    progressbarrunning.style.display = "flex"
+}
+
+function hideRunningProgress() {
+    let progressbarrunning = document.getElementById('progresssrunning')
+    progressbarrunning.style.display = "none"
+}
+
+function showDoneProgress() {
+    let progressbarrunning = document.getElementById('progressfinished')
+    progressbarrunning.style.display = "flex"
+}
+
+function hideDoneProgress() {
+    let progressbarrunning = document.getElementById('progressfinished')
+    progressbarrunning.style.display = "none"
+}
+
+
 
 // ============  CATCH USERS' EVENTS ==============================================
 
@@ -110,6 +145,7 @@ document.getElementById('clearcontrols').addEventListener('click', clearAllContr
 // User click submit button
 var buttonsubmit = document.getElementById("btnsubmit")
 buttonsubmit.addEventListener('click', function () {
+    showRunningProgress()
     console.log("okmen")
     let checkresults = checkEmptyAllControls()
     if (checkresults === false) {
@@ -125,23 +161,37 @@ buttonsubmit.addEventListener('click', function () {
             topic = document.getElementById('comboxTopic').value.trim()
             content = document.getElementById('txtContent').value.trim()
 
-
-            //get image content 
-
             //make a instance for image Class 
             const instanceIMGClass = new articleImage(articleID, userID, imgContent, isMainPhoto, isdeleted, db, documentID)
             instanceIMGClass.addImgToDatabase(db, documentID, imgContent)
+            setTimeout(function () {
+                var uploadresult = getCookieforArray("uploadedimgresult");
+                if (uploadresult === "success") {
+                    console.log("Upload the picture successfully!")
+                    deleteCookie("uploadedimgresult");
 
-            //make a instance for article Class 
-            // const instanceArticleClass = new Article(articleID, userID, mainheading, subheading, content, topic, isdeleted, db, documentID)
+                    // upload insert news data to database
+                    //make a instance for article Class 
+                    const instanceArticleClass = new Article(articleID, userID, mainheading, subheading, content, topic, isdeleted, db, documentID)
 
-            // //insert to firebase
-            // instanceArticleClass.inserttoDatabase()
+                    //insert to firebase
+                    instanceArticleClass.inserttoDatabase()
+                    //control progress bars
+                    hideRunningProgress()
+                    showDoneProgress()
+                } else {
+                    hideRunningProgress()
+                    alert("Cannot upload this picture!")
+                }
+            }, 500)
+
 
         } else {
+            hideRunningProgress()
             alert("You need to choose a photo for this news!")
         }
     } else {
+        hideRunningProgress()
         alert("Some Information is missing!")
     }
 
