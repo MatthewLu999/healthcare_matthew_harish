@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Page</title>
+    <!-- IMPORT LIBRARIES -->
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+crossorigin="anonymous"
+/>
+<script
+src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"
+></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<link
+href="https://fonts.googleapis.com/icon?family=Material+Icons"
+rel="stylesheet"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap"
+rel="stylesheet"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel=”stylesheet”
+href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
+<link
+href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+rel="stylesheet"
+/>
+<!-- import my css files -->
+<!-- External CSS -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- import Lora Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel=”stylesheet”
+href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
+<link
+href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+rel="stylesheet"
+/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+<!-- import my css files -->
+<!-- External CSS -->
+<link rel="stylesheet" href="css/index.css" />
+<link rel="stylesheet" href="css/index_small_screen.css" />
+<!-- import js file  -->
+ <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+
+<!-- Add Firebase Storage -->
+<script type="module" src="https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js"></script>
+<script src="js/common.js"></script>
+<script type="module" src="js/news_management.js"></script>
+
+  </head>
+  <body>
+    <!-- ======================== HEADER PART ============================== -->
+    <div id="header"></div>
+    <!-- import header from heade page -->
+    <script>
+      function includeHeader() {
+        fetch("header.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("header").innerHTML = data;
+          })
+          .catch((error) => console.error("Error fetching header:", error));
+      }
+      includeHeader();
+
+      // include footer by javascript
+      function includeFooter() {
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("footer").innerHTML = data;
+          })
+          .catch((error) => console.error("Error fetching header:", error));
+      }
+      includeFooter();
+    </script>
+<br>
+    <!-- ============================= PAGE BODY  ==============================-->
+     <section>
+      <div class="container">
+        <div class="row" style="height: 100%">
+            <!-- MAIN CONTENT SECTION -->
+            <div class="col-md-12" >
+              <div>
+                <h3>Update News</h3>
+                <table class="table align-middle mb-0 bg-white" style="margin-top: 10px;">
+                  <thead class="bg-light">
+                    <tr>
+                      <th>Topic</th>
+                      <th>News HeadLine</th>
+                      <th>News Subline</th>
+                      <th>Date Created</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                              src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                              alt=""
+                              style="width: 45px; height: 45px"
+                              class="rounded-circle"
+                              />
+                          <div class="ms-3">
+                            <p class="fw-bold mb-1">John Doe</p>
+                            <p class="text-muted mb-0">john.doe@gmail.com</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1">Software engineer</p>
+                        <p class="text-muted mb-0">IT department</p>
+                      </td>
+                      <td>
+                        <span class="badge badge-success rounded-pill d-inline">Active</span>
+                      </td>
+                      <td>Senior</td>
+                      <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+     </section>
+    <section>
+        <!-- ============================= FOOTER PART ================================-->
+    <div id="footer"></div>
+    
+    </section>
+
+  
+  </body>
+</html>
