@@ -1,8 +1,8 @@
-
+import { doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 // ============================================= ARTICLE CLASS ========================================================
 
 // ----------- Definition for article Class
-class article {
+export class Article {
     constructor(articleID, userID, mainheading, subheading, content, topic, isdeleted, db, documentID) {
         this.articleID = articleID
         this.userID = userID
@@ -19,14 +19,15 @@ class article {
     //add img to database
     async inserttoDatabase() {
         //check img info befire inserting to database
-        if (this.articleID !== null && this.articleID !== null && this.mainheading !== null && this.subheading !== null && this.content !== null && this.topic !== null && this.isdeleted !== null) {
+        if (this.userID !== null && this.articleID !== null && this.mainheading !== null && this.subheading !== null && this.content !== null && this.topic !== null && this.isdeleted !== null) {
             return new Promise((resolve, reject) => {
                 const docRef = doc(this.db, "articles", this.documentID);
+                const timestamp = new Date().toISOString();
 
                 setDoc(docRef, {
                     articleid: this.articleID,
                     content: this.content,
-                    createddate: this.createddate,
+                    createddate: timestamp,
                     deleted: 0,
                     maintitle: this.mainheading,
                     subtitle: this.subheading,
@@ -36,6 +37,9 @@ class article {
                     .then(() => {
                         console.log("Document written with ID: ", docRef.id);
                         resolve(docRef.id);
+                        let resulttxt = document.getElementById("resultofquiz")
+                        resulttxt.style.display = "block"
+                        resulttxt.innerText = "The News was created successfully!"
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);

@@ -60,7 +60,14 @@ rel="stylesheet"
 <!-- External CSS -->
 <link rel="stylesheet" href="css/index.css" />
 <link rel="stylesheet" href="css/index_small_screen.css" />
-<script src="js/news_management.js"></script>
+<!-- import js file  -->
+ <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+
+<!-- Add Firebase Storage -->
+<script type="module" src="https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js"></script>
+
+<script type="module" src="js/news_management.js"></script>
+
   </head>
   <body>
     <!-- ======================== HEADER PART ============================== -->
@@ -107,29 +114,29 @@ rel="stylesheet"
                 <!-- main new headline -->
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Main news headline</span>
+                    <span class="input-group-text" >Main news headline</span>
                   </div>
-                  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  <input id="txtNewsHeadLine" type="text" class="form-control" aria-label="Default" aria-describedby="txtNewsHeadLine">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">
+                    <span class="input-group-text" >
                       Sub-news headline&nbsp;</span>
                   </div>
-                  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  <input type="text" id="txtSubHeadLine" class="form-control" aria-label="Default" aria-describedby="txtSubHeadLine">
                 </div>
                 <!-- combox options fot topics of news -->
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Select news topics&nbsp;&nbsp;</label>
+                    <label class="input-group-text" for="comboxTopic">Select news topics&nbsp;&nbsp;</label>
                   </div>
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option selected >Choose ....</option>
-                    <option  value="0">Nutrition Meals</option>
-                    <option value="1">Doctors Discussion</option>
-                    <option value="2">Innovation</option>
-                    <option value="3">Public Health</option>
-                    <option value="3">Media Video</option>
+                  <select class="custom-select" id="comboxTopic">
+                    <option selected value="">Choose ....</option>
+                    <option  value="nutrition">Nutrition Meals</option>
+                    <option value="doctors">Doctors Discussion</option>
+                    <option value="innovation">Innovation</option>
+                    <option value="publichealth">Public Health</option>
+                    <option value="video">Media Video</option>
                   </select>
                 </div>
                 <!-- end combox -->
@@ -199,32 +206,34 @@ rel="stylesheet"
                 </div>
                 <br>
                 <!-- text area -->
-                <textarea class="form-control" id="textAreaExample6" rows="15"></textarea>
+                <textarea class="form-control" id="txtContent" rows="15"></textarea>
                 <hr>
                 <!-- upload file -->
                 <div class="input-group">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile04">
-                    <label class="custom-file-label" for="inputGroupFile04">Choose photo for the news</label>
+                    <input type="file" class="custom-file-input" id="inputImgFile">
+                    <label id="labelIMG" class="custom-file-label" for="inputImgFile">Choose photo for the news ...</label>
                   </div>
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Upload</button>
+                    <button class="btn btn-outline-secondary" id="btnUploadIMG" type="button">Upload</button>
                   </div>
                 </div>
                 <hr>
                 <div class="row">
                   <div class="col-md-12">
-                    <span><button type="button" class="btn btn-success">Submit</button></span>
-                    <span><button type="button" class="btn btn-secondary">Clear&nbsp;&nbsp;</button></span>
+                    <span><button  type="button" id="btnsubmit" class="btn btn-success" >Submit</button></span>
+                    <span><button type="button" id="clearcontrols" class="btn btn-secondary" >Clear&nbsp;&nbsp;</button></span>
                   </div>
                 </div>
-                
+                <br />
+                <div
+                  id="resultofquiz"
+                  class="alert alert-primary"
+                  role="alert"
+                  style="display: none; width: 100%"
+                ></div>
+              </div> 
               </div>
-             
-             
-                
-              </div>
-                
               </div>
           </div>
         </div>
