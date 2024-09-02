@@ -157,6 +157,8 @@ export class Article {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${ampm}`;
     }
 
+
+
     async getTableHTML(db, articles) {
         const table = document.createElement('table');
         table.setAttribute("id", "newslist")

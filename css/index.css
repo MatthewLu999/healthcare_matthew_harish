@@ -156,9 +156,8 @@ a {
 
 /* row left section */
 .main-content-row1-left {
-    flex: 1 1 60%;
+    flex: 1 1 100%;
     margin-top: 10px;
-    margin-left: 10px;
     align-self: self-start;
 }
 
