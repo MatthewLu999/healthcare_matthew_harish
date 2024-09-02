@@ -41,6 +41,7 @@ export class articleImage extends images {
         });
     }
 
+
     // add images to article
     async addImgToDatabase(db, documentID, imgcontent) {
         console.log("\n call upload img");

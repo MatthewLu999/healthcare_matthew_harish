@@ -146,7 +146,6 @@ document.getElementById('clearcontrols').addEventListener('click', clearAllContr
 var buttonsubmit = document.getElementById("btnsubmit")
 buttonsubmit.addEventListener('click', function () {
     showRunningProgress()
-    console.log("okmen")
     let checkresults = checkEmptyAllControls()
     if (checkresults === false) {
         console.log("\n ok not empty!")
