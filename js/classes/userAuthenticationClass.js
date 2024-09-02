@@ -1,7 +1,7 @@
 import { doc, getDoc, where, query, getFirestore } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-class UserAuthentication {
+export class UserAuthentication {
     constructor(db) {
         this.db = db;
         this.auth = getAuth();

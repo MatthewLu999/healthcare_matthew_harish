@@ -13,6 +13,60 @@ let slidesData = []
 let currentindexCausoel = [0]
 
 //=============  DEFINITON FOR FUNCTIONS ==========================================
+function createPagination(containerId, currentPage, totalPages) {
+    const container = document.getElementById(containerId);
+    container.style.fontSize = "0.7vw"
+    if (!container) {
+        console.error("Pagination container not found");
+        return;
+    }
+
+    const ul = document.createElement("ul");
+    ul.className = "pagination";
+    container.appendChild(ul);
+
+    // Previous button
+    const liPrev = document.createElement("li");
+    liPrev.className = "page-item" + (currentPage === 1 ? " disabled" : "");
+    ul.appendChild(liPrev);
+
+    const aPrev = document.createElement("a");
+    aPrev.className = "page-link";
+    aPrev.href = "#";
+    aPrev.textContent = "Previous";
+    liPrev.appendChild(aPrev);
+
+    // Numbered page links
+    for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement("li");
+        li.className = "page-item" + (i === currentPage ? " active" : "");
+        ul.appendChild(li);
+
+        const a = document.createElement("a");
+        a.className = "page-link";
+        a.href = "#";
+        a.textContent = i;
+        if (i === currentPage) {
+            const span = document.createElement("span");
+            span.className = "sr-only";
+            span.textContent = "(current)";
+            a.appendChild(span);
+        }
+        li.appendChild(a);
+    }
+
+    // Next button
+    const liNext = document.createElement("li");
+    liNext.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
+    ul.appendChild(liNext);
+
+    const aNext = document.createElement("a");
+    aNext.className = "page-link";
+    aNext.href = "#";
+    aNext.textContent = "Next";
+    liNext.appendChild(aNext);
+}
+
 function createBootstrapCarousel(carouselId, slides, carouselControl) {
     // Create the carousel container
     // const carousel = document.createElement('div');
@@ -28,7 +82,8 @@ function createBootstrapCarousel(carouselId, slides, carouselControl) {
         li.setAttribute('data-target', `#${carouselId}`);
         li.setAttribute('data-slide-to', index);
         li.setAttribute('class', 'carouselslideto')
-        if (index === 0) li.className = 'carouselslideto active';
+        li.style.backgroundColor = "black"
+        if (index === 0) li.className = 'carouselslideto active'; li.style.backgroundColor = "blue";
         indicators.appendChild(li);
     });
 
@@ -39,6 +94,7 @@ function createBootstrapCarousel(carouselId, slides, carouselControl) {
         const item = document.createElement('div');
         item.className = 'carousel-item';
         item.setAttribute("data-index", index)
+        item.style.width = "100%"
         if (index === 0) item.classList.add('active');
 
         const img = document.createElement('img');
@@ -48,13 +104,17 @@ function createBootstrapCarousel(carouselId, slides, carouselControl) {
         img.style.height = "15vw"
         //create div
         let divparent = document.createElement("div")
-        divparent.className = "carousel-caption d-none d-md-block"
+        divparent.className = "row carousel-caption d-none d-md-block"
+        divparent.style.position = "relative"
+
+        divparent.style.marginTop = "2vw"
+        divparent.style.marginRight = "15vw"
+        divparent.style.color = "black"
         let h5child = document.createElement("h5")
         h5child.textContent = slide.headline
-        h5child.style.backgroundColor = "gray"
+
 
         let pchild = document.createElement("p")
-        pchild.style.backgroundColor = "gray"
         pchild.textContent = slide.subline
 
         divparent.appendChild(h5child)
@@ -95,22 +155,24 @@ function createBootstrapCarousel(carouselId, slides, carouselControl) {
 }
 
 
-
-
-
-function createBreakingNewsArea(imageUrl, linkUrl, headlineText, description, timestamp, container) {
+function createBreakingNewsArea(docID, userID, articleId, imageUrl, linkUrl, headlineText, description, timestamp, container) {
     // Create the main 'panel-row-items' div
     const panelRowItems = document.createElement('div');
     panelRowItems.className = 'panel-row-items';
 
     // Create the image container and image element
     const divIcon = document.createElement('div');
-    divIcon.className = 'panel-row-icon';
+    divIcon.className = 'panel-row-icon imgbreakingnews';
     const img = document.createElement('img');
     img.src = imageUrl;
     img.style.borderRadius = '5px'
     img.style.width = '98%'; // Assuming full width here; adjust as per your needs
     img.style.height = '18vw'; // Assuming full height here; adjust as per your needs
+    img.setAttribute("data-docid", docID)
+    img.setAttribute("data-userID", userID)
+    img.setAttribute("data-articleID", articleId)
+    img.setAttribute("data-subhead", description)
+    img.setAttribute("data-mainhead", headlineText)
     divIcon.appendChild(img);
 
     // Create the title and text container
@@ -122,10 +184,15 @@ function createBreakingNewsArea(imageUrl, linkUrl, headlineText, description, ti
     pTitle.style.marginTop = '2px';
     const link = document.createElement('a');
     link.href = linkUrl;
-    link.target = '_blank';
+    link.target = 'news_detail.html';
     link.style.color = 'blue';
     link.style.fontSize = "1.5vw";
     link.style.fontWeight = "500"
+    link.setAttribute("data-docid", docID)
+    link.setAttribute("data-userID", userID)
+    link.setAttribute("data-articleID", articleId)
+    link.className = "breakingnewslinks"
+
     link.textContent = headlineText;
     pTitle.appendChild(link);
 
@@ -168,6 +235,104 @@ function createBreakingNewsArea(imageUrl, linkUrl, headlineText, description, ti
 }
 
 
+function createDailyNews(imageUrl, headlineText, description, timestamp, trTag) {
+
+    //------crreate all columns for first news
+    console.log(imageUrl)
+    // //column 1
+    let tdTag1 = document.createElement("td")
+
+    //------ img tag
+    let imgTag1 = document.createElement("img")
+    imgTag1.src = imageUrl
+    imgTag1.className = "rounded mx-auto d-block"
+    imgTag1.style.width = "13vw"
+    imgTag1.style.height = "12vw"
+    imgTag1.style.padding = "1vw"
+
+    //------append to Tag td 1
+    tdTag1.appendChild(imgTag1)
+    trTag.appendChild(tdTag1)
+    //next column 
+    let tdTag2 = document.createElement("td")
+
+    //-----h4 
+    let h4FristTag = document.createElement("h4")
+    h4FristTag.textContent = headlineText
+    h4FristTag.style.fontSize = '1.3vw';
+    h4FristTag.style.fontWeight = "500"
+    tdTag2.appendChild(h4FristTag)
+
+    //-----p
+    let pFristTag = document.createElement("p")
+    pFristTag.textContent = description
+    pFristTag.style.fontSize = '1vw';
+    pFristTag.style.fontWeight = "500"
+    tdTag2.appendChild(pFristTag)
+
+    //-----b
+    let bFristTag = document.createElement("b")
+    bFristTag.textContent = timestamp
+    bFristTag.style.fontSize = '0.8vw';
+    bFristTag.style.fontWeight = "500"
+    tdTag2.appendChild(bFristTag)
+
+    //---add all columns of fist news
+    //---add all columns of fist news
+
+    trTag.appendChild(tdTag2)
+}
+
+function createVideoHTMLNode(videolink, headlineText, description, timestamp, trTag) {
+    // //column 1
+    let tdTag1 = document.createElement("td")
+
+    //------ img tag
+    let imgTag1 = document.createElement("iframe")
+    imgTag1.src = videolink
+    imgTag1.className = "rounded mx-auto d-block"
+    imgTag1.style.width = "13vw"
+    imgTag1.style.height = "12vw"
+    imgTag1.style.padding = "1vw"
+    imgTag1.setAttribute("title", "YouTube video player")
+    imgTag1.setAttribute("frameborder", "0")
+    imgTag1.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share")
+    imgTag1.setAttribute("referrerpolicy", "strict-origin-when-cross-origin")
+
+    //------append to Tag td 1
+    tdTag1.appendChild(imgTag1)
+    trTag.appendChild(tdTag1)
+    //next column 
+    let tdTag2 = document.createElement("td")
+
+    //-----h4 
+    let h4FristTag = document.createElement("h4")
+    h4FristTag.textContent = headlineText
+    h4FristTag.style.fontSize = '1.3vw';
+    h4FristTag.style.fontWeight = "500"
+    tdTag2.appendChild(h4FristTag)
+
+    //-----p
+    let pFristTag = document.createElement("p")
+    pFristTag.textContent = description
+    pFristTag.style.fontSize = '1.1vw';
+    pFristTag.style.fontWeight = "500"
+    tdTag2.appendChild(pFristTag)
+
+    //-----b
+    let bFristTag = document.createElement("b")
+    bFristTag.textContent = timestamp
+    bFristTag.style.fontSize = '0.8vw';
+    bFristTag.style.fontWeight = "500"
+    tdTag2.appendChild(bFristTag)
+
+    //---add all columns of fist news
+    //---add all columns of fist news
+
+    trTag.appendChild(tdTag2)
+}
+
+
 
 async function getAllBreakingNews() {
     console.log("\n Get all news from FireBase")
@@ -182,6 +347,7 @@ async function getAllBreakingNews() {
     // carouselContainer.setAttribute("class", "carousel slide")
     // carouselContainer.setAttribute("data-ride", "carousel")
     carouselContainer.className = 'carousel slide';
+    carouselContainer.style.height = "26vw";
     carouselContainer.setAttribute('data-ride', 'carousel');
     slidesData = []
     //loop to read all values
@@ -191,10 +357,13 @@ async function getAllBreakingNews() {
             let headlineText = article.maintitle
             let description = article.subtitle
             let timestamp = await instanceArticleClass.convertTimestampToDateTimeAMPM(article.createddate)
+            let docID = article.id
+            let userid = article.userid
+            let articleID = article.articleid
             //check the first time
             if (isreadfirstitem) {
                 //create breaking news area
-                createBreakingNewsArea(imageUrl, linkUrl, headlineText, description, timestamp, container)
+                createBreakingNewsArea(docID, userid, articleID, imageUrl, linkUrl, headlineText, description, timestamp, container)
                 isreadfirstitem = false
             } else {
                 // The ID of the container where the carousel will be appended
@@ -203,45 +372,128 @@ async function getAllBreakingNews() {
         }
 
     }
+    // const carousel = createMiNiCarousel('mycarousel', slidesData, carouselContainer)
     const carousel = createBootstrapCarousel('mycarousel', slidesData, carouselContainer);
     container.appendChild(carousel);
 
 
 }
 
-// ============  CATCH USERS' EVENTS ==============================================
-await getAllBreakingNews()
+async function getAllDailyNews() {
+    console.log("\n Get daily news from FireBase")
+    let articlecollections = await instanceArticleClass.getAllArticles(db)
 
+    let tBodycontainer = document.getElementById("dailynewsArea")
+    let trTagFirst = document.createElement("tr")
+    tBodycontainer.appendChild(trTagFirst)
+    let totalNutritionNews = 0
+    let totalfirestrow = 0
+    let totalcolumnneed = 2
+    //loop to read all values
+    for (const article of articlecollections) {
+        if (article.topic === "nutrition") {
+            totalNutritionNews++
+            let imageUrl = await instanceArticleClass.fetchImages(db, article.id, article.articleid)
+            let headlineText = article.maintitle
+            let description = article.subtitle
+            let timestamp = await instanceArticleClass.convertTimestampToDateTimeAMPM(article.createddate)
+            // dataNews.push({ imgcontent: imageUrl, headline: headlineText, subline: description, datecreated: timestamp })
+            if (totalcolumnneed > 0) {
+                console.log("\n current index" + totalfirestrow + "," + headlineText)
+                createDailyNews(imageUrl, headlineText, description, timestamp, trTagFirst)
+                totalcolumnneed--
+            } else {
+                console.log("\n >2 break, " + totalfirestrow + "," + headlineText)
+                //reset
+                trTagFirst = document.createElement("tr")
+                tBodycontainer.appendChild(trTagFirst)
+                createDailyNews(imageUrl, headlineText, description, timestamp, trTagFirst)
+                totalcolumnneed = 2
 
-setInterval(() => {
-    let allslideitems = document.querySelectorAll(".carousel-item")
-    let miniunderline = document.querySelectorAll(".carouselslideto")
-
-    //remove all active class
-    allslideitems.forEach(element => {
-        element.classList.remove('active')
-    });
-
-    //remove all active class
-    miniunderline.forEach(element => {
-        element.classList.remove('active')
-    });
-
-    if (currentindexCausoel.length <= allslideitems.length) {
-        for (let i = 0; i < allslideitems.length; i++) {
-            let index = allslideitems[i].getAttribute("data-index")
-            if (!currentindexCausoel.includes(index)) {
-                currentindexCausoel.push(index)
-                allslideitems[i].classList.add('active')
-                miniunderline[i].classList.add('active')
-                break
             }
+
         }
-    } else {
-        currentindexCausoel = [0]
-        allslideitems[0].classList.add('active')
-        miniunderline[0].classList.add('active')
+
     }
-}, 2000);
+    //create pavigation 
+    let totalpages = Math.round(totalNutritionNews / 4)
+    createPagination("customnavigation", 1, totalpages)
+
+}
+
+async function getAllVideoMedia() {
+    console.log("\n Get daily news from FireBase")
+    let articlecollections = await instanceArticleClass.getAllArticles(db)
+
+    let tBodycontainer = document.getElementById("VideoArea")
+    let trTagFirst = document.createElement("tr")
+    tBodycontainer.appendChild(trTagFirst)
+    //loop to read all values
+    for (const article of articlecollections) {
+        if (article.topic === "video") {
+            let headlineText = article.maintitle
+            let description = article.subtitle
+            let timestamp = await instanceArticleClass.convertTimestampToDateTimeAMPM(article.createddate)
+            let videolink = article.videolink
+            // dataNews.push({ imgcontent: imageUrl, headline: headlineText, subline: description, datecreated: timestamp })
+            createVideoHTMLNode(videolink, headlineText, description, timestamp, trTagFirst)
+        }
+    }
+}
+
+// ============  CATCH USERS' EVENTS ==============================================
+//check if use is login or not 
+var current_username = getCookieforArray("username");
+console.log("\n call me:")
+console.log(current_username)
+let welcomelogo = document.getElementById("welcometxt")
+welcomelogo.innerText = "Welcome, " + current_username
+if (current_username !== null) {
+    await getAllBreakingNews()
+    await getAllDailyNews()
+    await getAllVideoMedia()
+
+    setInterval(() => {
+        let allslideitems = document.querySelectorAll(".carousel-item")
+        let miniunderline = document.querySelectorAll(".carouselslideto")
+
+        //remove all active class
+        allslideitems.forEach(element => {
+            element.classList.remove('active')
+        });
+
+        //remove all active class
+        miniunderline.forEach(element => {
+            element.classList.remove('active')
+            element.style.backgroundColor = "black"
+        });
+
+        if (currentindexCausoel.length <= allslideitems.length) {
+            for (let i = 0; i < allslideitems.length; i++) {
+                let index = allslideitems[i].getAttribute("data-index")
+                if (!currentindexCausoel.includes(index)) {
+                    currentindexCausoel.push(index)
+                    allslideitems[i].classList.add('active')
+                    miniunderline[i].classList.add('active')
+                    miniunderline[i].style.backgroundColor = "blue"
+                    break
+                }
+            }
+        } else {
+            currentindexCausoel = [0]
+            allslideitems[0].classList.add('active')
+            miniunderline[0].classList.add('active')
+        }
+    }, 3000);
+
+
+
+
+} else {
+    window.location.href = "login.html"
+}
+
+
+
 
 

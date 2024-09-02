@@ -120,7 +120,17 @@ async function getAllNews() {
 }
 
 // ============  CATCH USERS' EVENTS ==============================================
-await getAllNews()
+var current_username = getCookieforArray("username");
+console.log("\n call me:")
+console.log(current_username)
+let welcomelogo = document.getElementById("welcometxt")
+welcomelogo.innerText = "Welcome, " + current_username
+if (current_username !== null) {
+    await getAllNews()
+} else {
+    window.location.href = "login.html"
+}
+
 
 let btnreload = document.getElementById("btnReloadData")
 btnreload.addEventListener('click', function () {

@@ -12,7 +12,13 @@ let db = instanceConnectionFireBase.getDBConnection()
 let isuploadedPhoto = false
 //Declare essential variable 
 let articleID = ""
-let userID = "matthew@gmail.com"
+var current_username = getCookieforArray("username");
+if (current_username) {
+    userID = current_username
+} else {
+    userID = "admin@gmail.com"
+}
+
 let imgContent = ""
 let isMainPhoto = 1
 let documentID = ""
@@ -20,6 +26,7 @@ let mainheading = ""
 let subheading = ""
 let content = ""
 let topic = ""
+let videolink = ""
 let isdeleted = 0
 let isuploadedIMGSuccess = false
 
@@ -41,6 +48,11 @@ function clearAllControls() {
     labelIMG.innerText = "Choose photo for the news ..."
     // hide the done progress bar
     hideDoneProgress()
+    //
+    let videoInput = document.getElementById("txtVideoLink")
+    videoInput.style.display = "none"
+    let imgresult = document.getElementById("resultofuploadedIMG")
+    imgresult.src = ""
 }
 
 function isEmptyString(str) {
@@ -131,10 +143,23 @@ function hideDoneProgress() {
     let progressbarrunning = document.getElementById('progressfinished')
     progressbarrunning.style.display = "none"
 }
+function ComboxUserChange() {
+    let selectControl = document.getElementById("comboxTopic")
+    let inputVideo = document.getElementById("txtVideoLink")
+
+    if (selectControl.value !== "" && selectControl.value === "video") {
+        inputVideo.style.display = "flex"
+    } else {
+        inputVideo.style.display = "none"
+    }
+}
 
 
 
 // ============  CATCH USERS' EVENTS ==============================================
+document.getElementById('comboxTopic').addEventListener('change', ComboxUserChange);
+
+
 
 // User click the upload button
 document.getElementById('btnUploadIMG').addEventListener('click', handleFileUpload);
@@ -159,6 +184,7 @@ buttonsubmit.addEventListener('click', function () {
             subheading = document.getElementById('txtSubHeadLine').value.trim()
             topic = document.getElementById('comboxTopic').value.trim()
             content = document.getElementById('txtContent').value.trim()
+            videolink = document.getElementById('ContentVideoLink').value.trim()
 
             //make a instance for image Class 
             const instanceIMGClass = new articleImage(articleID, userID, imgContent, isMainPhoto, isdeleted, db, documentID)
@@ -174,7 +200,7 @@ buttonsubmit.addEventListener('click', function () {
                     const instanceArticleClass = new Article(articleID, userID, mainheading, subheading, content, topic, isdeleted, db, documentID)
 
                     //insert to firebase
-                    instanceArticleClass.inserttoDatabase()
+                    instanceArticleClass.inserttoDatabase(videolink)
                     //control progress bars
                     hideRunningProgress()
                     showDoneProgress()
@@ -196,6 +222,17 @@ buttonsubmit.addEventListener('click', function () {
 
 
 })
+
+var current_username = getCookieforArray("username");
+console.log("\n call me:")
+console.log(current_username)
+let welcomelogo = document.getElementById("welcometxt")
+welcomelogo.innerText = "Welcome, " + current_username
+if (current_username !== null) {
+
+} else {
+    window.location.href = "login.html"
+}
 
 
 

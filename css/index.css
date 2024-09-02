@@ -18,7 +18,7 @@ a {
 /* background of main content */
 .bg-container {
     max-width: 960px;
-    height: 1120px;
+    height: 1700px;
     margin: 0 auto;
     background-color: white;
 }
@@ -211,9 +211,8 @@ a {
 }
 
 .panel-header-title{
-    flex: 1 1 90%;
-    padding: 10px;
-    font-size: 15px;
+    font-size: 1vw;
+    margin-top: 0.5vw;
 }
 
 /* for panel body flex content */
@@ -342,8 +341,8 @@ margin-bottom: 10px;
 /* footer */
 .footer-container{
     color: white;
-    background-color: #0F7CBF;
-    margin-top: 20px;
+    background-color: #0f7cbf;
+    font-size: 1.3vw;
     display: flex;
     width: 100%;
     flex-flow: row;
@@ -407,45 +406,62 @@ margin-bottom: 10px;
     height: 50px;
   }
   .function1-animation-keyframe p{
+    margin-top: 1vw;
+    font-size: 1.1vw;
     font-weight: bold;
-    color: #0F7CBF;       
+    color: green;       
     animation-name: myanimation;
     animation-timing-function: linear;
-    animation-duration: 15s;
-    animation-delay: 250ms;
-    animation-iteration-count: 1000;
-    animation-direction: alternate;
+    animation-duration: 20s;
+    animation-delay: 100ms;
+    animation-iteration-count: 2;
+    animation-direction: alternate-reverse;
     animation-play-state: running;
+    animation-iteration-count: infinite;
 
 }
 @keyframes myanimation{
     0% {
+        opacity: 1;
     transform: translateX(0%);
     }
     10% {
+        opacity: 1;
     transform: translateX(10%);
     }
     20% {
-    transform: translateX(20%) rotate(2deg);
+        opacity: 1;
+    transform: translateX(20%);
     }
     30% {
+        opacity: 1;
     transform: translateX(30%);
     }
     40% {
-    transform: translateX(40%) rotate(-2deg);
+        opacity: 1;
+    transform: translateX(40%);
     }
     50% {
-    transform: translateX(50%) ;
+        opacity: 1;
+    transform: translateX(50%);
   }
     60% {
-    transform: translateX(60%) rotate(2deg);
+        opacity: 1;
+    transform: translateX(60%) ;
+    opacity: 1;
     }
     70% {
     transform: translateX(70%);
+    opacity: 0.9;
     }
     80% {
-    transform: translateX(80%) rotate(-2deg);
+    transform: translateX(80%);
+    opacity: 0.7;
     }
+    90% {
+        transform: translateX(100%);
+        opacity: 0;
+        }
     }
 
     /* icon partners */

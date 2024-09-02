@@ -33,105 +33,104 @@
 />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel=”stylesheet”
-href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
-<link
-  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
-  rel="stylesheet"
-/>
+
 <!-- import my css files -->
 <!-- External CSS -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- import Lora Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel=”stylesheet”
-href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
-<link
-  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
-  rel="stylesheet"
-/>
+
 <!-- import my css files -->
 <!-- External CSS -->
 <link rel="stylesheet" href="css/index.css" />
 <link rel="stylesheet" href="css/index_small_screen.css" />
 
+<script></script>
 <!-- main wrapper -->
 <header>
-  <section>
-    <div class="header-section">
-      <div class="header-logo">
-        <img height="90px" src="images/doctor_icon.png" />
-      </div>
-      <div class="header-slogan">XYZ MEDICAL CLINIC</div>
-      <div class="header-call-us">
-        <table>
-          <tr>
-            <td colspan="2">
-              <img width="55px" height="55px" src="images/callus.png" />
-            </td>
-            <td>
-              <p>Call for an appointment</p>
-              <p>(123)-456-7890</p>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="function1-animation-keyframe">
-      <p>Welcome to XYZ Medical Clinic</p>
-    </div>
-  </section>
   <!-- navigation -->
 
   <section>
-    <div class="navigation-section">
-      <div class="navigation-items">
-        <a
-          href="index.html"
-          class="navigation-text navigation-items-active"
-          target="_blank"
-          >Home</a
-        >
-        <a href="#" id="news-managment" class="navigation-text"
-          >News Management
-          <!-- <div class="dropdown-content">
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div> -->
-          <img
-            class="mini-icon"
-            height="20px"
-            width="25px"
-            src="images/arrow_down.svg"
-        /></a>
-        <a href="#" class="navigation-text">Reporting Center</a>
-        <a href="contact_us.html" class="navigation-text">Contact Us</a>
-      </div>
-      <div class="navigation-right-container">
-        <div class="navigation-right-container-avatar">
-          <div class="navigation-right-container-item avatar">
-            <img height="30px" width="30px" src="images/login_icon.JPG" />
-          </div>
-          <div
-            class="navigation-right-container-item"
-            style="
-              font-size: 12px;
-              margin-bottom: 2px;
-              margin-left: 48px;
-              color: white;
-              font-weight: bold;
-            "
-          >
-            <a
-              href="profile.html"
-              target="_blank"
-              style="text-decoration: none; color: white"
-              >Login</a
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
+      style="background-color: #0f7cbf"
+    >
+      <img src="images/heargif.gif" style="width: 2vw; height: 2vw" />
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html"
+              >Home <span class="sr-only">(current)</span></a
             >
-          </div>
-        </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style="font-weight: 700; color: white"
+            >
+              News Management
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="update_news.html">Update News</a>
+              <a class="dropdown-item" href="create_news.html">Create News</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="contact_us.html"
+              style="font-weight: 700; color: white"
+              >Contact Us <span class="sr-only">(current)</span></a
+            >
+          </li>
+        </ul>
+        <span
+          class="navbar-text"
+          style="font-weight: 700; color: white; margin-top: 5px"
+        >
+          <span class="material-icons"> account_circle </span>&nbsp;
+        </span>
+        <span
+          id="welcometxt"
+          class="navbar-text"
+          style="font-weight: 700; color: white; font-style: italic"
+        >
+          &nbsp;Welcome
+        </span>
+        <span
+          class="navbar-text"
+          id="btnlogout"
+          style="
+            font-weight: 700;
+            color: white;
+            margin-top: 5px;
+            cursor: pointer;
+          "
+          >&nbsp; <span class="material-icons"> logout </span>&nbsp;
+        </span>
       </div>
-    </div>
+    </nav>
+    <!-- Bootstrap CSS -->
   </section>
 </header>

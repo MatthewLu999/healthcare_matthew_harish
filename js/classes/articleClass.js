@@ -17,7 +17,7 @@ export class Article {
 
 
     //add img to database
-    async inserttoDatabase() {
+    async inserttoDatabase(videolink) {
         //check img info befire inserting to database
         if (this.userID !== null && this.articleID !== null && this.mainheading !== null && this.subheading !== null && this.content !== null && this.topic !== null && this.isdeleted !== null) {
             return new Promise((resolve, reject) => {
@@ -32,7 +32,8 @@ export class Article {
                     maintitle: this.mainheading,
                     subtitle: this.subheading,
                     topic: this.topic,
-                    userid: this.userID
+                    userid: this.userID,
+                    videolink: videolink
                 })
                     .then(() => {
                         console.log("Document written with ID: ", docRef.id);
@@ -286,6 +287,8 @@ export class Article {
 
         return table;
     }
+
+
 
     // Replace this function with your logic to get the image URL based on article ID
     async getArticleImageUrl(db, articleID, documentID) {
