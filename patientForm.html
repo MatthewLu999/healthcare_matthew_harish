@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- import Lora Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel=”stylesheet” href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <!-- import my css files -->
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index_small_screen.css">
+    <title>NEWS DETAIL</title>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+    />
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+    ></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+    ></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap"
+    rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel=”stylesheet”
+    href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- import my css files -->
+    <!-- External CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- import Lora Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel=”stylesheet”
+    href=”https://fonts.googleapis.com/icon?family=Material+Icons”>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+    rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <!-- import my css files -->
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/index_small_screen.css" />
+    <link rel="stylesheet" href="css/createnews.css" />
+    <!-- import js file  -->
+     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    
+    <!-- Add Firebase Storage -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js"></script>
+    <script src="js/common.js"></script>
+    <script type="module" src="js/connection.js"></script>
+</head>
+
+<body>
+    <!-- main wrapper -->
+    <header>
+      <!-- ======================== HEADER PART ============================== -->
+      <div id="header"></div>
+      <!-- import header from heade page -->
+      <script>
+        function includeHeader() {
+          fetch("header.html")
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("header").innerHTML = data;
+            })
+            .catch((error) => console.error("Error fetching header:", error));
+        }
+        includeHeader();
+  
+        // include footer by javascript
+        function includeFooter() {
+          fetch("footer.html")
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("footer").innerHTML = data;
+            })
+            .catch((error) => console.error("Error fetching header:", error));
+        }
+        includeFooter();
+      </script>
+  <br>
+    </header>
+    
+        <!-- MAIN CONTENT -->
+        <div class="bg-container">
+            <main class="bg-container">
+                <section>
+                    <div class="main-content-row2" style="margin-top: 5vw;">
+                        <div class="my-panel-row2">
+                            <div class="my-panel-panel-header">
+                                <div class="panel-header-items-row2">
+                                    <div class="panel-header-icon-row-2">
+                                        <img height="30px" width="30px" src="images/bell.png">
+                                    </div>
+                                    <div class="panel-header-title-row-2">Patient Form</div>
+                                </div>
+                            </div>
+                            <div class="my-panel-panel-body">
+                                <!-- Patient Form -->
+                                <form id="patientForm">
+                                    <h2>Patient Information</h2>
+                                    <label for="patientName">Name:</label>
+                                    <input type="text" id="patientName" name="patientName" required>
+                                    
+                                    <label for="patientAge">Age:</label>
+                                    <input type="number" id="patientAge" name="patientAge" required>
+                                    
+                                    <label for="illnessDescription">Illness Description:</label>
+                                    <textarea id="illnessDescription" name="illnessDescription" required></textarea>
+                                    
+                                    <h3>Prescription</h3>
+                                    <div id="prescriptionList" style="margin-bottom: 15px;"></div>
+                                    
+                                    <label for="prescriptionItem">Add Item:</label>
+                                    <input type="text" id="prescriptionItem" name="prescriptionItem">
+                                    <button type="button" id="addPrescriptionItemButton">Add</button>
+    
+                                    <button type="submit" style="margin-top: 15px;">Submit</button>
+                                </form>
+                                <hr>
+                                <!-- Patient Report -->
+                                <div id="patientReport" style="display:none;">
+                                    <h2>Patient Report</h2>
+                                    <p><strong>Name:</strong> <span id="reportPatientName"></span></p>
+                                    <p><strong>Age:</strong> <span id="reportPatientAge"></span></p>
+                                    <p><strong>Illness Description:</strong> <span id="reportIllnessDescription"></span></p>
+                                    <h3>Prescription</h3>
+                                    <ul id="reportPrescriptionList"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+                 <!-- end body -->
+                  <!-- start footer -->
+                   <footer>
+                    <footer>
+                        <div id="footer" style="margin-top: 1vw;"></div>
+                    </footer>
+                   </footer>
+        </div>
+    
+
+
+    <!-- Example of script tag in your HTML file (e.g., news_detail.html) -->
+    <script type="module" src="js/PatientForm.js"></script>
+
+
+
+</html>

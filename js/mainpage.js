@@ -83,7 +83,7 @@ function createBootstrapCarousel(carouselId, slides, carouselControl) {
         li.setAttribute('data-slide-to', index);
         li.setAttribute('class', 'carouselslideto')
         li.style.backgroundColor = "black"
-        if (index === 0) li.className = 'carouselslideto active'; li.style.backgroundColor = "blue";
+        if (index === 0) li.className = 'carouselslideto active'; li.style.backgroundColor = "blue";;
         indicators.appendChild(li);
     });
 
@@ -110,8 +110,12 @@ function createBootstrapCarousel(carouselId, slides, carouselControl) {
         divparent.style.marginTop = "2vw"
         divparent.style.marginRight = "15vw"
         divparent.style.color = "black"
-        let h5child = document.createElement("h5")
+        let h5child = document.createElement("a")
         h5child.textContent = slide.headline
+        h5child.href = 'news_detail.html?articleID=' + slide.articleID;
+        h5child.target = 'news_detail.html?articleID=' + slide.articleID;
+        h5child.style.fontSize = "1.5vw";
+        h5child.style.fontWeight = "500"
 
 
         let pchild = document.createElement("p")
@@ -119,6 +123,8 @@ function createBootstrapCarousel(carouselId, slides, carouselControl) {
 
         divparent.appendChild(h5child)
         divparent.appendChild(pchild)
+
+
         item.appendChild(img);
         item.appendChild(divparent)
         inner.appendChild(item);
@@ -183,8 +189,8 @@ function createBreakingNewsArea(docID, userID, articleId, imageUrl, linkUrl, hea
     const pTitle = document.createElement('p');
     pTitle.style.marginTop = '2px';
     const link = document.createElement('a');
-    link.href = linkUrl;
-    link.target = 'news_detail.html';
+    link.href = 'news_detail.html?articleID=' + articleId;
+    link.target = 'news_detail.html?articleID=' + articleId;
     link.style.color = 'blue';
     link.style.fontSize = "1.5vw";
     link.style.fontWeight = "500"
@@ -235,7 +241,7 @@ function createBreakingNewsArea(docID, userID, articleId, imageUrl, linkUrl, hea
 }
 
 
-function createDailyNews(imageUrl, headlineText, description, timestamp, trTag) {
+function createDailyNews(imageUrl, headlineText, description, timestamp, trTag, articleID) {
 
     //------crreate all columns for first news
     console.log(imageUrl)
@@ -257,10 +263,15 @@ function createDailyNews(imageUrl, headlineText, description, timestamp, trTag) 
     let tdTag2 = document.createElement("td")
 
     //-----h4 
-    let h4FristTag = document.createElement("h4")
+    let h4FristTag = document.createElement("a")
     h4FristTag.textContent = headlineText
     h4FristTag.style.fontSize = '1.3vw';
     h4FristTag.style.fontWeight = "500"
+    h4FristTag.href = 'news_detail.html?articleID=' + articleID;
+    h4FristTag.target = 'news_detail.html?articleID=' + articleID;
+    h4FristTag.style.color = 'blue';
+    h4FristTag.style.fontWeight = "500"
+
     tdTag2.appendChild(h4FristTag)
 
     //-----p
@@ -344,10 +355,8 @@ async function getAllBreakingNews() {
     let isreadfirstitem = true
     const carouselContainer = document.createElement('div');
     carouselContainer.setAttribute("id", "mycarousel")
-    // carouselContainer.setAttribute("class", "carousel slide")
-    // carouselContainer.setAttribute("data-ride", "carousel")
     carouselContainer.className = 'carousel slide';
-    carouselContainer.style.height = "26vw";
+    carouselContainer.style.height = "27vw";
     carouselContainer.setAttribute('data-ride', 'carousel');
     slidesData = []
     //loop to read all values
@@ -367,12 +376,12 @@ async function getAllBreakingNews() {
                 isreadfirstitem = false
             } else {
                 // The ID of the container where the carousel will be appended
-                slidesData.push({ src: imageUrl, alt: headlineText, headline: headlineText, subline: description })
+                slidesData.push({ src: imageUrl, alt: headlineText, headline: headlineText, subline: description, articleID: articleID })
             }
         }
 
     }
-    // const carousel = createMiNiCarousel('mycarousel', slidesData, carouselContainer)
+    // create the content for other news
     const carousel = createBootstrapCarousel('mycarousel', slidesData, carouselContainer);
     container.appendChild(carousel);
 
@@ -393,6 +402,7 @@ async function getAllDailyNews() {
     for (const article of articlecollections) {
         if (article.topic === "nutrition") {
             totalNutritionNews++
+            let articleID = article.articleid
             let imageUrl = await instanceArticleClass.fetchImages(db, article.id, article.articleid)
             let headlineText = article.maintitle
             let description = article.subtitle
@@ -400,14 +410,14 @@ async function getAllDailyNews() {
             // dataNews.push({ imgcontent: imageUrl, headline: headlineText, subline: description, datecreated: timestamp })
             if (totalcolumnneed > 0) {
                 console.log("\n current index" + totalfirestrow + "," + headlineText)
-                createDailyNews(imageUrl, headlineText, description, timestamp, trTagFirst)
+                createDailyNews(imageUrl, headlineText, description, timestamp, trTagFirst, articleID)
                 totalcolumnneed--
             } else {
                 console.log("\n >2 break, " + totalfirestrow + "," + headlineText)
                 //reset
                 trTagFirst = document.createElement("tr")
                 tBodycontainer.appendChild(trTagFirst)
-                createDailyNews(imageUrl, headlineText, description, timestamp, trTagFirst)
+                createDailyNews(imageUrl, headlineText, description, timestamp, trTagFirst, articleID)
                 totalcolumnneed = 2
 
             }

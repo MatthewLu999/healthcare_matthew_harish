@@ -60,6 +60,7 @@ rel="stylesheet"
 <!-- External CSS -->
 <link rel="stylesheet" href="css/index.css" />
 <link rel="stylesheet" href="css/index_small_screen.css" />
+<link rel="stylesheet" href="css/createnews.css" />
 <!-- import js file  -->
  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 
@@ -98,7 +99,7 @@ rel="stylesheet"
 <br>
     <!-- ============================= PAGE BODY  ==============================-->
      <section>
-      <div class="container">
+      <div class="container" style="position: relative;margin-top: 4vw;">
         <div class="row" style="height: 100%">
             <!-- MAIN CONTENT SECTION -->
             <div class="col-md-12" >
@@ -146,25 +147,26 @@ rel="stylesheet"
                     <div class="col-md-6">
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <label class="input-group-text" for="inputGroupSelect01">Fonts&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                          <label class="input-group-text" for="selectFontControl">Fonts&nbsp;&nbsp;&nbsp;&nbsp;</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01" >
+                        <select class="custom-select" id="selectFontControl" >
                           <option selected>Choose...</option>
-                          <option value="1">Time News Roman</option>
-                          <option value="2">Lora</option>
-                          <option value="3">Arial</option>
+                          <option value="Times New Roman">Time News Roman</option>
+                          <option value="Arial">Arial</option>
                         </select>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <label class="input-group-text" for="inputGroupSelect01"> Font Size</label>
+                          <label class="input-group-text" for="FontSizeControl"> Font Size</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01" >
+                        <select class="custom-select" id="FontSizeControl" >
                           <option selected>Choose...</option>
-                          <option value="1">11</option>
-                          <option value="2">12</option>
+                          <option value="0.5vw">9</option>
+                          <option value="0.8vw">15</option>
+                          <option value="1vw">18</option>
+                          <option value="1.3vw">20</option>
                         </select>
                       </div>
                       
@@ -181,19 +183,18 @@ rel="stylesheet"
                 
               
                   <div class="ui icon buttons">
-                    <button class="ui cap button"><i class="header icon"></i></button>
-                    <button class="ui bold button"><i class="bold icon"></i></button>
-                    <button class="ui  button"><i class="underline icon"></i></button>
+                    <button id="btncapitalize" class="ui cap button"><i class="header icon"></i></button>
+                    <button id="btnBold" class="ui bold button"><i class="bold icon"></i></button>
+                    <button id="btnUnderLine" class="ui  button"><i class="underline icon"></i></button>
                     <button class="ui button"><i class="text width icon"></i></button>
-                    <button class="ui button"><i class="italic width icon"></i></button>
-                    <button class="ui button"><i class="paragraph icon"></i></button>
+                    <button id="btnItalic" class="ui button"><i class="italic width icon"></i></button>
                   </div>
               
                   <div class="ui icon buttons">
-                    <button class="ui button"><i class="align left icon"></i></button>
-                    <button class="ui button"><i class="align center icon"></i></button>
-                    <button class="ui button"><i class="align right icon"></i></button>
-                    <button class="ui button"><i class="align justify icon"></i></button>
+                    <button id="btnTextAlignLeft" class="ui button"><i class="align left icon"></i></button>
+                    <button id="btnTextAlignCenter" class="ui button"><i class="align center icon"></i></button>
+                    <button id="btnTextAlignRight" class="ui button"><i class="align right icon"></i></button>
+                    <button id="btnTextAlignJustify" class="ui button"><i class="align justify icon"></i></button>
                   </div>
               
               
@@ -204,7 +205,9 @@ rel="stylesheet"
                 </div>
                 <br>
                 <!-- text area -->
-                <textarea class="form-control" id="txtContent" rows="15"></textarea>
+                <!-- <textarea class="form-control" id="txtContent" rows="15"></textarea> -->
+                <div id="txtContent" class="customTextarea" contenteditable="true" style="height: 25vw;">
+              </div>
                 <hr>
                 <!-- upload file -->
                 <div class="input-group">

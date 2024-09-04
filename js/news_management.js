@@ -7,11 +7,11 @@ import { images, articleImage } from './classes/imageClass.js';
 //make a instance for Connection Class
 const instanceConnectionFireBase = new Connection()
 let db = instanceConnectionFireBase.getDBConnection()
-
 //Declare a varibale for determine whether the user uploaded a photo or not
 let isuploadedPhoto = false
 //Declare essential variable 
 let articleID = ""
+let userID = ""
 var current_username = getCookieforArray("username");
 if (current_username) {
     userID = current_username
@@ -40,7 +40,7 @@ function clearAllControls() {
     txtmainheadline.value = ""
     txtSubHeadLine.value = ""
     comboxTopic.value = ""
-    txtContent.value = ""
+    txtContent.innerHTML = ""
     var resulttxt = document.getElementById("resultofquiz")
     resulttxt.style.display = "none"
     //clear label img
@@ -52,7 +52,7 @@ function clearAllControls() {
     let videoInput = document.getElementById("txtVideoLink")
     videoInput.style.display = "none"
     let imgresult = document.getElementById("resultofuploadedIMG")
-    imgresult.src = ""
+    imgresult.src = "images/pictureicon.png"
 }
 
 function isEmptyString(str) {
@@ -77,7 +77,7 @@ function checkEmptyAllControls() {
         isEmpty = true
     }
 
-    if (isEmptyString(txtContent.value)) {
+    if (isEmptyString(txtContent.innerText)) {
         console.log("Empty Content!")
         isEmpty = true
     }
@@ -96,6 +96,7 @@ function generateTimestampId() {
 }
 
 function handleFileUpload() {
+    isuploadedPhoto = false
     const inputImgFile = document.getElementById('inputImgFile');
     const file = inputImgFile.files[0];
 
@@ -154,9 +155,225 @@ function ComboxUserChange() {
     }
 }
 
+// functions for formart font size, color 
+function ChangeFontType() {
+    var control = document.getElementById("selectFontControl")
+    var fonttype = control.value
+
+    // const customArea = document.getElementById('customarea');
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.style.fontFamily = fonttype
+    newNode.textContent = selectedText;
+
+    range.deleteContents();
+    range.insertNode(newNode);
+}
+
+
+
+function changeFontSize() {
+    var control = document.getElementById("FontSizeControl")
+    var fontSize = control.value
+
+    // const customArea = document.getElementById('customarea');
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.style.fontSize = fontSize
+    newNode.textContent = selectedText;
+
+    range.deleteContents();
+    range.insertNode(newNode);
+}
+
+
+
+function ChangetextColor() {
+    var control = document.getElementById("myColor")
+    var fontcolor = control.value
+    // const customArea = document.getElementById('customarea');
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+    console.log(range)
+    const newNode = document.createElement('span');
+    newNode.textContent = selectedText;
+    newNode.style.color = fontcolor
+    range.deleteContents();
+    range.insertNode(newNode);
+    window.getSelection().removeAllRanges(); // Clears the old selection
+    const newRange = document.createRange(); // Creates a new range
+    newRange.selectNode(newNode); // Selects the new node
+    window.getSelection().addRange(newRange); // Applies the new range
+}
+
+function BolderBold() {
+    // const customArea = document.getElementById('customarea');
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.style.fontWeight = "800"
+    newNode.textContent = selectedText;
+
+    range.deleteContents();
+    range.insertNode(newNode);
+}
+
+function Italic() {
+    // const customArea = document.getElementById('customarea');
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.style.fontStyle = "italic"
+    newNode.textContent = selectedText;
+
+    range.deleteContents();
+    range.insertNode(newNode);
+}
+
+function underLine() {
+    // const customArea = document.getElementById('customarea');
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.style.textDecoration = "underline"
+    newNode.textContent = selectedText;
+
+    range.deleteContents();
+    range.insertNode(newNode);
+}
+
+function AlignCenter() {
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.textContent = selectedText;
+    newNode.style.display = "inline-block";  // or "block" based on your needs
+    newNode.style.textAlign = "center";
+    newNode.style.width = "100%";
+
+    range.deleteContents();
+    range.insertNode(newNode);
+    window.getSelection().removeAllRanges(); // Clears the old selection
+    const newRange = document.createRange(); // Creates a new range
+    newRange.selectNode(newNode); // Selects the new node
+    window.getSelection().addRange(newRange); // Applies the new range
+}
+
+function AlignRight() {
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.textContent = selectedText;
+    newNode.style.display = "inline-block";  // or "block" based on your needs
+    newNode.style.textAlign = "right";
+    newNode.style.width = "100%";
+
+    range.deleteContents();
+    range.insertNode(newNode);
+    window.getSelection().removeAllRanges(); // Clears the old selection
+    const newRange = document.createRange(); // Creates a new range
+    newRange.selectNode(newNode); // Selects the new node
+    window.getSelection().addRange(newRange); // Applies the new range
+}
+
+function AlignLeft() {
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.textContent = selectedText;
+    newNode.style.display = "inline-block";  // or "block" based on your needs
+    newNode.style.textAlign = "left";
+    newNode.style.width = "100%";
+
+    range.deleteContents();
+    range.insertNode(newNode);
+    window.getSelection().removeAllRanges(); // Clears the old selection
+    const newRange = document.createRange(); // Creates a new range
+    newRange.selectNode(newNode); // Selects the new node
+    window.getSelection().addRange(newRange); // Applies the new range
+}
+
+function AlignJustify() {
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.textContent = selectedText;
+    newNode.style.display = "inline-block";  // or "block" based on your needs
+    newNode.style.textAlign = "justify";
+    newNode.style.width = "100%";
+
+    range.deleteContents();
+    range.insertNode(newNode);
+    window.getSelection().removeAllRanges(); // Clears the old selection
+    const newRange = document.createRange(); // Creates a new range
+    newRange.selectNode(newNode); // Selects the new node
+    window.getSelection().addRange(newRange); // Applies the new range
+}
+
+function CapitalizeText() {
+    const selectedText = window.getSelection().toString();
+    console.log(selectedText)
+    const range = window.getSelection().getRangeAt(0);
+
+    const newNode = document.createElement('span');
+    newNode.textContent = selectedText.toUpperCase()
+
+    range.deleteContents();
+    range.insertNode(newNode);
+    window.getSelection().removeAllRanges(); // Clears the old selection
+    const newRange = document.createRange(); // Creates a new range
+    newRange.selectNode(newNode); // Selects the new node
+    window.getSelection().addRange(newRange); // Applies the new range
+}
+
 
 
 // ============  CATCH USERS' EVENTS ==============================================
+// document.getElementById('txtContent').addEventListener('input', highlightSelectedText);
+
+document.getElementById('btncapitalize').addEventListener('click', CapitalizeText);
+
+document.getElementById('btnBold').addEventListener('click', BolderBold);
+
+document.getElementById('btnTextAlignJustify').addEventListener('click', AlignJustify);
+
+document.getElementById('btnTextAlignRight').addEventListener('click', AlignRight);
+
+document.getElementById('btnTextAlignCenter').addEventListener('click', AlignCenter);
+
+document.getElementById('btnTextAlignLeft').addEventListener('click', AlignLeft);
+
+document.getElementById('btnItalic').addEventListener('click', Italic);
+
+document.getElementById('btnUnderLine').addEventListener('click', underLine);
+
+document.getElementById('FontSizeControl').addEventListener('change', changeFontSize);
+
+document.getElementById('myColor').addEventListener('change', ChangetextColor);
+
+document.getElementById('selectFontControl').addEventListener('change', ChangeFontType);
+
 document.getElementById('comboxTopic').addEventListener('change', ComboxUserChange);
 
 
@@ -183,10 +400,9 @@ buttonsubmit.addEventListener('click', function () {
             mainheading = document.getElementById('txtNewsHeadLine').value.trim()
             subheading = document.getElementById('txtSubHeadLine').value.trim()
             topic = document.getElementById('comboxTopic').value.trim()
-            content = document.getElementById('txtContent').value.trim()
+            content = document.getElementById('txtContent').innerHTML
             videolink = document.getElementById('ContentVideoLink').value.trim()
-
-            //make a instance for image Class 
+            // //make a instance for image Class 
             const instanceIMGClass = new articleImage(articleID, userID, imgContent, isMainPhoto, isdeleted, db, documentID)
             instanceIMGClass.addImgToDatabase(db, documentID, imgContent)
             setTimeout(function () {
@@ -208,7 +424,7 @@ buttonsubmit.addEventListener('click', function () {
                     hideRunningProgress()
                     alert("Cannot upload this picture!")
                 }
-            }, 500)
+            }, 1000)
 
 
         } else {
@@ -224,14 +440,13 @@ buttonsubmit.addEventListener('click', function () {
 })
 
 var current_username = getCookieforArray("username");
-console.log("\n call me:")
-console.log(current_username)
 let welcomelogo = document.getElementById("welcometxt")
-welcomelogo.innerText = "Welcome, " + current_username
-if (current_username !== null) {
 
+if (current_username !== null) {
+    welcomelogo.innerText = "Welcome, " + current_username
 } else {
-    window.location.href = "login.html"
+    // window.location.href = "login.html"
+    welcomelogo.innerText = "Welcome, guest"
 }
 
 
